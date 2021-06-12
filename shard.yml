@@ -1,0 +1,17 @@
+name: srsh
+version: 0.1.0
+
+authors:
+  - Ryan Bloom <ryan@ryan-bloom.com>
+
+targets:
+  srsh:
+    main: src/srsh.cr
+    
+dependencies:
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+
+crystal: 1.0.0
+
+license: MIT
