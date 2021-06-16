@@ -1,4 +1,4 @@
-# `srsh`: Spaced Repetition for SHell commands
+# `srsh`: Spaced Repetition for Shell Commands
 
 `srsh` is a simple program designed to help you learn shell commands.
 
