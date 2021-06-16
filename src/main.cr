@@ -1,6 +1,6 @@
 require "option_parser"
 
-require "./card.cr"
+require "./exercise.cr"
 require "./collection.cr"
 
 db_file = ENV["SRSH_DB"]? || "~/srsh.db"
@@ -16,9 +16,9 @@ puts "Using database #{db_file}"
 collection = Collection.new db_file
 
 if ARGV[0]? == "id"
-  puts collection.max_id+1
+  puts collection.max_id + 1
 elsif ARGV[0]? == "import"
-  collection.import_cards ARGV[1]
+  collection.import ARGV[1]
 else
   collection.run_session(20)
 end

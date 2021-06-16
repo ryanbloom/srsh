@@ -4,15 +4,14 @@ class Exercise
   property topic = "Shell"
   property front = ""
   property back = ""
+  property last_review = 0_i64
   property next_review = 0_i64
-  property interval : Int64 = 86400_i64
-  property e_factor : Float32 = 2.0
   property deleted = false
   
   def initialize
     @next_review = Time.utc.to_unix
   end
-  def initialize(@id, @topic, @front, @back, @next_review, @interval, @e_factor)
+  def initialize(@id, @topic, @front, @back, @last_review, @next_review)
     
   end
   
@@ -50,11 +49,17 @@ class Exercise
         puts "No."
       end
     end
-    if right
-      @interval *= 2
+    if last_review == 0
+      interval = ONE_DAY*3
     else
-      @interval = ONE_DAY
+      interval = Time.utc.to_unix - @last_review
     end
+    if right
+      interval *= 2
+    else
+      interval = ONE_DAY
+    end
+    @last_review = Time.utc.to_unix
     @next_review = Time.utc.to_unix + interval
   end
 end
