@@ -1,27 +1,38 @@
-# srsh
+# `srsh`: Spaced Repetition for SHell commands
 
-TODO: Write a description here
+`srsh` is a simple program designed to help you learn shell commands.
 
 ## Installation
 
-TODO: Write installation instructions here
+You'll need to have [Crystal](https://crystal-lang.org) installed.
+Then just clone the repo and `crystal build src/main.cr -o srsh`.
+Put the output somewhere in your `$PATH`.
 
-## Usage
+## Getting started
 
-TODO: Write usage instructions here
+First, create a text file with some examples of the commands
+you want to learn. 
 
-## Development
+```
+# Navigation
 
-TODO: Write development instructions here
+123
+List the files in the current directory, including hidden files.
+ls -a
+```
 
-## Contributing
+Here, `123` is a unique ID for the exercise. You can leave it out, but
+then any modification will be imported as a new exercise instead of a 
+replacement for the old one. Exercises will be presented with the most
+recent heading (denoted with `#`) to provide context.
 
-1. Fork it (<https://github.com/your-github-user/srsh/fork>)
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+To import a file, use `srsh import exercises.txt`. This will read in all the
+exercises and put them into a SQLite database at `~/srsh.db`. You can change
+the location of the database with the environment variable `$SRSH_DB`.
 
-## Contributors
+## Review
 
-- [Ryan Bloom](https://github.com/your-github-user) - creator and maintainer
+`srsh` automatically schedules exercises for review at increasing intervals.
+To start a review session, simply run `srsh`.
+
+To delete an exercise, type `!del` when prompted for the answer.
