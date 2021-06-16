@@ -38,12 +38,19 @@ class Collection
   end
 
   def update(c : Card)
+    if c.deleted
+      db.exec "delete from cards where id=?", c.id
+      return
+    end
     db.exec "update cards set next_review=?, interval=?, e=? where front=?", c.next_review, c.interval, c.e_factor, c.front
   end
 
   def run_session(count : Int)
     sess = get_session(count)
-    remaining = count
+    remaining = sess.size
+    if remaining == 0
+      puts "Nothing to study right now. Import a file or check back later."
+    end
     sess.each do |card|
       puts "#{remaining} cards left"
       card.test

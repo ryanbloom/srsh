@@ -7,7 +7,8 @@ class Card
   property next_review = 0_i64
   property interval : Int64 = 86400_i64
   property e_factor : Float32 = 2.0
-
+  property deleted = false
+  
   def initialize
     @next_review = Time.utc.to_unix
   end
@@ -25,6 +26,11 @@ class Card
     printf "❯ "
     maybe_answer = gets
     answer = maybe_answer ? maybe_answer : ""
+    if answer == "!del"
+      @deleted = true
+      puts "Card deleted."
+      return
+    end
     right = check answer
     printf "\x1b[1A\x1b[2K"
     if right
