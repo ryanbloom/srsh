@@ -35,10 +35,24 @@ class Card
     printf "\x1b[1A\x1b[2K"
     if right
       puts "✔ " + answer
-      @interval *= 2
     else
       puts "𝗫 " + answer
       puts "✔ " + back
+      printf "Close enough? "
+      char : (Char | Nil) = nil
+      STDIN.raw do
+        char = STDIN.read_char
+      end
+      if char == 'y'
+        right = true
+        puts "Yes."
+      else
+        puts "No."
+      end
+    end
+    if right
+      @interval *= 2
+    else
       @interval = ONE_DAY
     end
     @next_review = Time.utc.to_unix + interval
