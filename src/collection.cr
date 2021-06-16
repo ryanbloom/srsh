@@ -2,7 +2,6 @@ require "sqlite3"
 require "./card.cr"
 
 class Collection
-  property cards = [] of Card
   property db : DB::Database
 
   def initialize(path : String)
@@ -11,6 +10,19 @@ class Collection
     unless existed
       db.exec "create table cards (id text primary key, topic text, front text, back text, next_review integer, interval integer, e real)"
     end
+  end
+
+  def max_id : Int32
+    highest = 0
+    db.query "select id from cards " do |rs|
+      rs.each do
+        id = rs.read(String).to_i?
+        if id && id > highest
+          highest = id
+        end
+      end
+    end
+    return highest
   end
 
   def merge(new_cards : Array(Card))
