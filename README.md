@@ -4,9 +4,18 @@
 
 ## Installation
 
-You'll need to have [Crystal](https://crystal-lang.org) installed.
-Then just clone the repo and `crystal build src/main.cr -o srsh`.
-Put the output somewhere in your `$PATH`.
+First, make sure you have [Crystal](https://crystal-lang.org) installed.
+Then:
+
+```bash
+git clone https://github.com/ryanbloom/srsh.git
+cd srsh
+shards install
+crystal build src/main.cr -o srsh
+```
+
+You'll probably want to move the output to a directory that's included
+in your `$PATH`.
 
 ## Getting started
 
