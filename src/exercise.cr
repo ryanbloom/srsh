@@ -1,4 +1,6 @@
 ONE_DAY = 86400_i64
+ONE_HOUR = 3600_i64
+
 class Exercise
   property id = ""
   property topic = "Shell"
@@ -59,8 +61,9 @@ class Exercise
     else
       interval = ONE_DAY
     end
+    noise = Random.rand(ONE_HOUR)
     @last_review = Time.utc.to_unix
-    @next_review = Time.utc.to_unix + interval
+    @next_review = Time.utc.to_unix + interval + noise
   end
 end
 
